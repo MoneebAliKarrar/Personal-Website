@@ -50,6 +50,17 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+		<script type="text/javascript"
+				src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+		</script>
+		<script type="text/javascript">
+		(function(){
+			emailjs.init({
+				publicKey: "{EMAILJS_USER_ID}",
+			});
+		})();
+		</script>
+
     </head>
 	
 	<body>
@@ -876,33 +887,33 @@
 										<div class="row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name">
+												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-													<input type="email" class="form-control" id="email" placeholder="Email*" name="email">
+													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
+													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<textarea class="form-control" rows="8" id="comment" placeholder="Message" ></textarea>
+													<textarea class="form-control" rows="8" id="comment" placeholder="Message" required></textarea>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<button type="submit" class="contact-btn" onClick="sendEmail()">submit</button>
+													<button class="contact-btn" onclick="sendEmail()">submit</button>
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -1008,30 +1019,41 @@
 		<!--Font Awesome-->
 		<script src="https://kit.fontawesome.com/f0aee0e8b9.js" crossorigin="anonymous"></script>
 
-
-
-		<!--Sending Email emailjs-->
-		<script type="text/javascript"
-				src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-		</script>
-		<script type="text/javascript">
-		(function(){
-			emailjs.init({
-				publicKey: "uVasKmHGvgvF-ekc2",
-			});
-		})();
-		</script>
+		<!--Sending Email emailjs-->		
 		<script>
-			function sendEmail(){
-				let email = {
-					name: document.getElementById("name").value,
-					email: document.getElementById("email").value,
-					subject: document.getElementById("subject").value,
-					message: document.getElementById("message").value
+			function sendEmail() {
+				event.preventDefault();
+				let name = document.getElementById("name").value.trim();
+				let email = document.getElementById("email").value.trim();
+				let subject = document.getElementById("subject").value.trim();
+				let message = document.getElementById("comment").value.trim();
+
+				// Validate form data
+				if (!name || !email || !subject || !message) {
+					alert("All fields are required!");
+					return;
 				}
 
-				emailjs.sendEmail("service_tdhz3yb","template_0lwvcdq",email).then(alert("email sent successfuly"));
-			}
+				// Prepare email data
+				let emailData = {
+					name: name,
+					email: email,
+					subject: subject,
+					message: message
+				};
+				document.getElementById("name").value = "";
+				document.getElementById("email").value = "";
+				document.getElementById("subject").value = "";
+				document.getElementById("comment").value = "";
+				emailjs.send(`{EMAILJS_SERVICE_ID}`, `{EMAILJS_TEMPLATE_ID}`, emailData)
+					.then(function(response) {
+						alert("Email sent successfully!");
+					}, function(error) {
+						alert("Failed to send email: " + JSON.stringify(error));
+					});
+				}
+				
+
 		</script>
         
     </body>
