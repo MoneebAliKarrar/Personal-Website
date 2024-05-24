@@ -1,47 +1,22 @@
-name: Deploy
+name: Example Workflow
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch: # Allows manual triggering
 
 jobs:
-  build:
+  example-job:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Replace secrets in HTML
-      run: |
-        sed -i 's/{EMAILJS_USER_ID}/${{ secrets.EMAILJS_USER_ID }}/g' path/to/your/index.html
-        sed -i 's/{EMAILJS_SERVICE_ID}/${{ secrets.EMAILJS_SERVICE_ID }}/g' path/to/your/index.html
-        sed -i 's/{EMAILJS_TEMPLATE_ID}/${{ secrets.EMAILJS_TEMPLATE_ID }}/g' path/to/your/index.html
-        cat path/to/your/index.html # Debug step to verify replacement
-
-    - name: Build project
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
-
-    - name: Send Telemetry Data
-      run: |
-        gh api -X POST "repos/$GITHUB_REPOSITORY/pages/telemetry" \
-          -F github_run_id="${{ github.run_id }}" \
-          -F conclusion="success"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: Run JavaScript file
+        run: node your_script.js
+        env:
+          EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
