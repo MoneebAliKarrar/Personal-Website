@@ -1045,7 +1045,7 @@
 				document.getElementById("email").value = "";
 				document.getElementById("subject").value = "";
 				document.getElementById("comment").value = "";
-				emailjs.send(`{EMAILJS_SERVICE_ID}`, `{EMAILJS_TEMPLATE_ID}`, emailData)
+				emailjs.send("{EMAILJS_SERVICE_ID}", "{EMAILJS_TEMPLATE_ID}", emailData)
 					.then(function(response) {
 						alert("Email sent successfully!");
 					}, function(error) {
