@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   build:
@@ -22,7 +23,11 @@ jobs:
       run: npm install
 
     - name: Replace secrets in HTML
-      run: sed -i 's/{EMAILJS_USER_ID}/${{ secrets.EMAILJS_USER_ID }}/g' path/to/your/index.html
+      run: |
+        sed -i 's/{EMAILJS_USER_ID}/${{ secrets.EMAILJS_USER_ID }}/g' path/to/your/index.html
+        sed -i 's/{EMAILJS_SERVICE_ID}/${{ secrets.EMAILJS_SERVICE_ID }}/g' path/to/your/index.html
+        sed -i 's/{EMAILJS_TEMPLATE_ID}/${{ secrets.EMAILJS_TEMPLATE_ID }}/g' path/to/your/index.html
+        cat path/to/your/index.html # Debug step to verify replacement
 
     - name: Build project
       run: npm run build
@@ -32,3 +37,11 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
+
+    - name: Send Telemetry Data
+      run: |
+        gh api -X POST "repos/$GITHUB_REPOSITORY/pages/telemetry" \
+          -F github_run_id="${{ github.run_id }}" \
+          -F conclusion="success"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
