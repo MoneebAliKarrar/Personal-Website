@@ -20,3 +20,11 @@ jobs:
           EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
           EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+
+      - name: Verify secrets
+        run: |
+          echo "EMAILJS_USER_ID starts with: "${{secrets.EMAILJS_USER_ID }} | sed 's/./& /g'
+        env:
+          SECRETS_EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
+          SECRETS_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          SECRETS_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
