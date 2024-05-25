@@ -28,6 +28,12 @@ jobs:
           SECRETS_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           SECRETS_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
 
+      - name: Replace placeholders with secrets
+        run: |
+          sed -i 's/{EMAILJS_USER_ID}/'${{ secrets.EMAILJS_USER_ID }}'/g' script.js
+          sed -i 's/{EMAILJS_SERVICE_ID}/'${{ secrets.EMAILJS_SERVICE_ID }}'/g' script.js
+          sed -i 's/{EMAILJS_TEMPLATE_ID}/'${{ secrets.EMAILJS_TEMPLATE_ID }}'/g' script.js
+
       - name: Run JavaScript file
         run: node your_script.js
         env:
