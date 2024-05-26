@@ -1049,7 +1049,7 @@
 					.then(function(response) {
 						alert("Email sent successfully!");
 					}, function(error) {
-						alert("Failed to send email: " + JSON.stringify(error));
+						alert("Failed to send email: ${{EMAILJS_USER_ID}} " + JSON.stringify(error));
 					});
 				}
 				
