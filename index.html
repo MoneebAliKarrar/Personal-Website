@@ -824,6 +824,14 @@
 											</a>
 										</div><!-- /.isotope-overlay -->
 									</div><!-- /.item -->
+									<div class="item">
+										<img src="assets/images/portfolio/employeeManager.png" alt="portfolio image"/>
+										<div class="isotope-overlay">
+											<a href="https://github.com/MoneebAliKarrar/Employee-Manager-FrontEnd" target="_blank">
+												Fullstack design
+											</a>
+										</div><!-- /.isotope-overlay -->
+									</div><!-- /.item -->
 								</div><!-- /.col -->
 
 								<div class="col-sm-4">
@@ -1047,9 +1055,9 @@
 				document.getElementById("comment").value = "";
 				emailjs.send("service_q4fc354","template_nj5do8v", emailData)
 					.then(function(response) {
-						alert("Email sent successfully!");
+						alert("Email sent successfully! ✔");
 					}, function(error) {
-						alert("Failed to send email:  " + EMAILJS_USER_ID + JSON.stringify(error));
+						alert("❌Failed to send email:" +JSON.stringify(error));
 					});
 				}
 				
