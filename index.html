@@ -61,6 +61,43 @@
 		})();
 		</script>
 
+		<!--Sending Email emailjs-->		
+		<script>
+			function sendEmail() {
+				let name = document.getElementById("name").value.trim();
+				let email = document.getElementById("email").value.trim();
+				let subject = document.getElementById("subject").value.trim();
+				let message = document.getElementById("comment").value.trim();
+
+				// Validate form data
+				if (!name || !email || !subject || !message) {
+					alert("All fields are required!");
+					return;
+				}
+
+				// Prepare email data
+				let emailData = {
+					name: name,
+					email: email,
+					subject: subject,
+					message: message
+				};
+				document.getElementById("name").value = "";
+				document.getElementById("email").value = "";
+				document.getElementById("subject").value = "";
+				document.getElementById("comment").value = "";
+				emailjs.send("service_q4fc354","template_nj5do8v", emailData)
+					.then(function(response) {
+						alert("Email sent successfully! ✔");
+						location.reload();
+					}, function(error) {
+						alert("❌Failed to send email:" +JSON.stringify(error));
+					});
+				}
+				
+
+		</script>
+
     </head>
 	
 	<body>
@@ -330,10 +367,10 @@
 					</div>
 					<div class="container">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-10" >
 								<div class="single-skill-content">
 									<div class="barWrapper">
-										<span class="progressText">C,C++,C#</span>
+										<span class="progressText"><span style="font-weight: bold;"> BackEnd development :</span> Java, springBoot</span>
 										<div class="single-progress-txt">
 											<!--
 											<div class="progress ">
@@ -346,7 +383,7 @@
 										</div>
 									</div><!-- /.barWrapper -->
 									<div class="barWrapper">
-										<span class="progressText">Python</span>
+										<span class="progressText"><span style="font-weight: bold;"> FrontEnd development : </span> HTML, CSS, JavaScript, TypeScript, Angular, Bootstrap</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -359,7 +396,7 @@
 										-->
 									</div><!-- /.barWrapper -->
 									<div class="barWrapper">
-										<span class="progressText">Java, springBoot</span>
+										<span class="progressText"> <span style="font-weight: bold;"> DataBase : </span> SQL server, MySQL, PostgreSQL</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -372,7 +409,7 @@
 									-->
 									</div><!-- /.barWrapper -->
 									<div class="barWrapper">
-										<span class="progressText">HTML, CSS</span>
+										<span class="progressText"><span style="font-weight: bold;"> Operating systems : </span> Windows, Linux</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -384,12 +421,8 @@
 										</div>
 									-->
 									</div><!-- /.barWrapper -->
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="single-skill-content">
 									<div class="barWrapper">
-										<span class="progressText">typeScript, Angular</span>
+										<span class="progressText">C,C++, C#</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -402,7 +435,7 @@
 									-->
 									</div><!-- /.barWrapper -->
 									<div class="barWrapper">
-										<span class="progressText">JavaScript</span>
+										<span class="progressText">Python</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -415,7 +448,7 @@
 									-->
 									</div><!-- /.barWrapper -->
 									<div class="barWrapper">
-										<span class="progressText">SQL server , MySQL</span>
+										<span class="progressText">Matlab</span>
 										<!--
 										<div class="single-progress-txt">
 											<div class="progress ">
@@ -424,19 +457,6 @@
 											   </div>
 											</div>
 											<h3>97%</h3>	
-										</div>
-									-->
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText"> Operating systems (Windows, Linux)</span>
-										<!--
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>90%</h3>	
 										</div>
 									-->
 									</div><!-- /.barWrapper -->
@@ -921,7 +941,7 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<button class="contact-btn" onclick="sendEmail()">submit</button>
+													<button class="contact-btn" type="button" onclick="sendEmail()">submit</button>
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -1027,42 +1047,7 @@
 		<!--Font Awesome-->
 		<script src="https://kit.fontawesome.com/f0aee0e8b9.js" crossorigin="anonymous"></script>
 
-		<!--Sending Email emailjs-->		
-		<script>
-			function sendEmail() {
-				event.preventDefault();
-				let name = document.getElementById("name").value.trim();
-				let email = document.getElementById("email").value.trim();
-				let subject = document.getElementById("subject").value.trim();
-				let message = document.getElementById("comment").value.trim();
-
-				// Validate form data
-				if (!name || !email || !subject || !message) {
-					alert("All fields are required!");
-					return;
-				}
-
-				// Prepare email data
-				let emailData = {
-					name: name,
-					email: email,
-					subject: subject,
-					message: message
-				};
-				document.getElementById("name").value = "";
-				document.getElementById("email").value = "";
-				document.getElementById("subject").value = "";
-				document.getElementById("comment").value = "";
-				emailjs.send("service_q4fc354","template_nj5do8v", emailData)
-					.then(function(response) {
-						alert("Email sent successfully! ✔");
-					}, function(error) {
-						alert("❌Failed to send email:" +JSON.stringify(error));
-					});
-				}
-				
-
-		</script>
+		
         
     </body>
 	
